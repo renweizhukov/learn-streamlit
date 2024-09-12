@@ -1,9 +1,16 @@
 import streamlit as st
-import numpy as np
-import pandas as pd
+import time
 
-dataframe = pd.DataFrame(
-    np.random.randn(10, 20),
-    columns=('col %d' % i for i in range(20)))
+'Starting a long computation...'
 
-st.dataframe(dataframe.style.highlight_max(axis=0))
+# Add a placeholder
+latest_iteration = st.empty()
+bar = st.progress(0)
+
+for i in range(100):
+  # Update the progress bar with each iteration.
+  latest_iteration.text(f'Iteration {i+1}')
+  bar.progress(i + 1)
+  time.sleep(0.1)
+
+'...and now we\'re done!'
